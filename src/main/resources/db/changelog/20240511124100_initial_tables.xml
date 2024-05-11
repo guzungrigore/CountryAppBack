@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+
+    <!--Added Country Table-->
+    <changeSet id="20240511124400-1" author="grigore">
+        <createTable tableName="country">
+            <column name="id" type="bigserial" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="capital" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="continent" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="population" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="language" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="image" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
