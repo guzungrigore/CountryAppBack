@@ -24,7 +24,7 @@ public class CountryService {
 
 
     public Page<Country> getCountries(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
+        Pageable pageable = PageRequest.of(page - 1, size);
         return countryRepository.findAll(pageable);
     }
 

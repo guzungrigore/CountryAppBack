@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="20240512130800-1" author="grigore">
+        <createTable tableName="user">
+            <column name="id" type="bigserial" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+            <column name="username" type="varchar(50)">
+                <constraints nullable="false" unique="true" uniqueConstraintName="ux_user_login"/>
+            </column>
+            <column name="password" type="varchar(60)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20240512131900-2" author="grigore">
+        <createTable tableName="authority">
+            <column name="name" type="varchar(50)">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20240512131900-3" author="grigore">
+        <createTable tableName="user_authority">
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="authority_name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey tableName="user_authority" columnNames="user_id, authority_name"/>
+    </changeSet>
+
+    <changeSet id="20240512132000-4" author="grigore">
+        <addForeignKeyConstraint
+                baseTableName="user_authority"
+                baseColumnNames="user_id"
+                constraintName="fk_user_id"
+                referencedTableName="user"
+                referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="20240512132000-5" author="grigore">
+        <addForeignKeyConstraint
+                baseTableName="user_authority"
+                baseColumnNames="authority_name"
+                constraintName="fk_authority_name"
+                referencedTableName="authority"
+                referencedColumnNames="name"/>
+    </changeSet>
+
+</databaseChangeLog>

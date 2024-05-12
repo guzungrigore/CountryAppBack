@@ -6,3 +6,8 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
   liquibase:
     change-log: classpath:db/master.xml
+
+country:
+  jwt:
+    duration: 1
+    chrono: minutes

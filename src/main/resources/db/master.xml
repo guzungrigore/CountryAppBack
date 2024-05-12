@@ -19,5 +19,6 @@
 
     <include file="db/changelog/20240511124100_initial_tables.xml" relativeToChangelogFile="false"/>
     <include file="db/changelog/20240511130700_initial_data.xml" relativeToChangelogFile="false"/>
-
+    <include file="db/changelog/20240512130700_user_table.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/20240512132300_user_data.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -59,8 +60,12 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth ->
                         // prettier-ignore
                         auth
-                                .requestMatchers("/login", "/country", "country/**").permitAll()
-                                .requestMatchers("/file/**").authenticated()
+                                .requestMatchers("/login").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/country", "country/{id}").authenticated()
+                                .requestMatchers(HttpMethod.POST, "/country").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.PUT, "/country/{id}").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.DELETE, "/country/{id}").hasRole("ADMIN")
+
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling(exceptions ->
