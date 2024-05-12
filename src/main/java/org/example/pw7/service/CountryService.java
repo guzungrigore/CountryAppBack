@@ -61,7 +61,8 @@ public class CountryService {
     }
 
     private Country getCountryFromDB(long id) {
-        return countryRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        return countryRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(
+                "Entity with id " + id + " not found"));
     }
 
     private void upsertCountry(CountryDto countryDto, Country country) {

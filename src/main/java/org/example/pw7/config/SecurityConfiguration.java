@@ -32,6 +32,13 @@ public class SecurityConfiguration {
 
     private final Environment env;
 
+    private static final String[] AUTH_WHITE_LIST = {
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
+            "/v2/api-docs/**",
+            "/swagger-resources/**"
+    };
+
     public SecurityConfiguration(Environment env) {
         this.env = env;
     }
@@ -60,6 +67,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth ->
                         // prettier-ignore
                         auth
+                                .requestMatchers(AUTH_WHITE_LIST).permitAll()
                                 .requestMatchers("/login").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/country", "country/{id}").authenticated()
                                 .requestMatchers(HttpMethod.POST, "/country").hasRole("ADMIN")
