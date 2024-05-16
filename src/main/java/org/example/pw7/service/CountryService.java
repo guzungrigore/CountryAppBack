@@ -55,6 +55,7 @@ public class CountryService {
     public ResponseDto updateCountry(Long id, CountryDto countryDto) {
         Country country = getCountryFromDB(id);
 
+        country.setId(id);
         upsertCountry(countryDto, country);
 
         return new ResponseDto("Country updated successfully");

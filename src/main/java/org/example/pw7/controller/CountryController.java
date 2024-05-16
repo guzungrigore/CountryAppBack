@@ -49,7 +49,7 @@ public class CountryController {
     @GetMapping("/country")
     public ResponseEntity<Page<Country>> getCountries(
             @RequestParam(defaultValue = "1") int page,
-            @RequestParam(defaultValue = "5") int size) {
+            @RequestParam(defaultValue = "8") int size) {
         return ResponseEntity.status(OK).body(countryService.getCountries(page, size));
     }
 
